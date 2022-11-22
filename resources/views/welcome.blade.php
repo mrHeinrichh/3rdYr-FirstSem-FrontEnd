@@ -27,18 +27,24 @@
           <li class="cursor-pointer">Pricings</li>
           <li class="cursor-pointer">Contacts</li>
           <div>
+            <a href="{{ url('/login') }}">
             <button
               type="button"
-              class="bg-bookmark-red text-white rounded-md px-7 py-3 uppercase"
+              class="bg-bookmark-red text-white rounded-md px-7 py-3 uppercase" 
             >
+            
               Login
+              
             </button>
+          </a>
+          <a href="{{ url('/signup') }}">
             <button
               type="button"
               class="bg-bookmark-red text-white rounded-md px-7 py-3 uppercase"
             >
               Sign Up
             </button>
+          </a>
           </div>
         </ul>
         <div class="flex sm:hidden flex-1 justify-end">
