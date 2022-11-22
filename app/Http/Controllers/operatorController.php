@@ -53,10 +53,10 @@ class operatorController extends Controller
 
         $files = $request->file('uploads');
 
-        $operator->image_path = 'images/' . $files->getClientOriginalName();
+        $operator->image_path = 'uploads/' . $files->getClientOriginalName();
         $operator->save();
 
-        Storage::put('images/' . $files->getClientOriginalName(), file_get_contents($files));
+        Storage::put('uploads/' . $files->getClientOriginalName(), file_get_contents($files));
 
         return response()->json(["success" => "Operator Created Successfully.", "operator" => $operator, "status" => 200]);
     }
