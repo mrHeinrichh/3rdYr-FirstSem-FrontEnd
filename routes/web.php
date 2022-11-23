@@ -24,3 +24,7 @@ Route::get('/login', function () {
 Route::get('/signup', function () {
     return view('signup');
 });
+
+Route::resource('operator', 'operatorController');
+
+route::view('/operator-index', 'operator.index');
