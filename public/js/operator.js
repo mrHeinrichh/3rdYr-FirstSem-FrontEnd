@@ -30,7 +30,6 @@ $(document).ready(function () {
             {
                 data: "name",
             },
-
             {
                 data: "contact_number",
             },
@@ -73,7 +72,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "/api/operator/",
+            url: "http://localhost:5000/api/v1/operator",
             data: formData,
             contentType: false,
             processData: false,
@@ -85,6 +84,7 @@ $(document).ready(function () {
                 console.log(data);
                 $("#operatorModal").modal("hide");
                 var $otable = $("#otable").DataTable();
+                $otable.ajax.reload();
                 $otable.row.add(data.operator).draw(false);
             },
             error: function (error) {
@@ -165,7 +165,7 @@ $(document).ready(function () {
         });
     });
 
-    $("#operatorupdate").on("click", function (e) {
+    $("#operatorUpdate").on("click", function (e) {
         e.preventDefault();
         var id = $("#operator_id").val();
         console.log(id);
