@@ -33,5 +33,5 @@
     integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script src="js/custom_2.js"></script>
+<script src="js/operator.js"></script>
 {{-- <script src="js/dashboard.js"></script> --}}
