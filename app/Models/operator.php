@@ -18,4 +18,8 @@ class operator extends Model
         "address",
         "image_path"
     ];
+
+    public function services() {
+        return $this->hasMany('App\Models\service');
+    }
 }
