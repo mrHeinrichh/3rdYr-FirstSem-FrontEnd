@@ -34,4 +34,5 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script src="js/operator.js"></script>
+<script src="js/service.js"></script>
 {{-- <script src="js/dashboard.js"></script> --}}

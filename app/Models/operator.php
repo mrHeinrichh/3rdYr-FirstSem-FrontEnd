@@ -9,7 +9,7 @@ class operator extends Model
 {
     use HasFactory;
     public $table = "operator";
-    // public $timestamps = false;
+    public $timestamps = false;
     public $primaryKey = "operator_id";
     protected $fillable = [
         "name",

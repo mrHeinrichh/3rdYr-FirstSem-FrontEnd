@@ -51,13 +51,13 @@ class operatorController extends Controller
         $operator->age = $request->age;
         $operator->address = $request->address;
 
-        $files = $request->file('uploads');
-
-        $operator->image_path = 'uploads/' . $files->getClientOriginalName();
+        if ($request->hasfile("image_path")) {
+            $file = $request->file("image_path");
+            $filename = uniqid() . "_" . $file->getClientOriginalName();
+            $file->move("uploads/operator/", $filename);
+            $operator->image_path = $filename;
+        }
         $operator->save();
-
-        Storage::put('uploads/' . $files->getClientOriginalName(), file_get_contents($files));
-
         return response()->json(["success" => "Operator Created Successfully.", "operator" => $operator, "status" => 200]);
     }
 
@@ -93,10 +93,32 @@ class operatorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $operator = operator::find($id);
-        $operator = $operator->update($request->all());
-        $operator = operator::find($id);
 
+        // $operator = operator::find($id);
+        // $operator = $operator->update($request->all());
+        // $operator = operator::find($id);
+
+        // return response()->json($operator);
+
+        $operator = operator::find($id);
+        $operator->name = $request->name;
+        $operator->contact_number = $request->contact_number;
+        $operator->age = $request->age;
+        $operator->address = $request->address;
+
+       if ($request->hasfile("image_path")) {
+            $destination = "uploads/operator/" . $operator->image_path;
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+            $file = $request->file("image_path");
+            $filename = uniqid() . "_" . $file->getClientOriginalName();
+            $file->move("uploads/operator/", $filename);
+            $operator->image_path = $filename;
+        }
+
+        $operator->update();
+        $operator = operator::find($id);
         return response()->json($operator);
     }
 
@@ -110,9 +132,9 @@ class operatorController extends Controller
     {
         $operator = operator::findOrFail($id);
 
-        if (File::exists("storage/" . $operator->image_path)) {
-            File::delete("storage/" . $operator->image_path);
-        }
+        // if (File::exists("public/storage/images/" . $operator->image_path)) {
+        //     File::delete("public/storage/images/" . $operator->image_path);
+        // }
 
         $operator->delete();
 

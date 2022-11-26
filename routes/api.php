@@ -18,8 +18,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('operator', 'operatorController');
+
 
 route::view('/operator-index', 'operator.index');
+
+Route::get('/operator/all',['uses' => 'operatorController@getoperatorAll','as' => 'operator.getoperatorall'] );
+
+Route::resource('operator', 'operatorController');
+
+Route::resource('service', 'serviceController');
+
+route::view('/service-index', 'service.index');
 
 

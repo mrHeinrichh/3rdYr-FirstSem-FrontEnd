@@ -28,3 +28,7 @@ Route::get('/signup', function () {
 Route::resource('operator', 'operatorController');
 
 route::view('/operator-index', 'operator.index');
+
+Route::resource('service', 'serviceController');
+
+route::view('/service-index', 'service.index');

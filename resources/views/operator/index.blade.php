@@ -69,8 +69,8 @@
                         <input type="text" class="form-control" id="address" name="address">
                     </div>
                     <div class="form-group">
-                        <label for="uploads" class="control-label">Operator Image</label>
-                        <input type="file" class="form-control" id="uploads" name="uploads">
+                        <label for="image_path" class="control-label">Operator Image</label>
+                        <input type="file" class="form-control" id="image_path" name="image_path">
                     </div>
                 </form>
             </div>

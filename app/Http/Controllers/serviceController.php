@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\service;
+use App\Models\operator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -18,13 +19,14 @@ class serviceController extends Controller
      */
     public function index()
     {
-        $service = service::orderBy('service_id', 'DESC')->get();
+        $service = service::with(['operator'])->orderBy('service_id', 'DESC')->get();
         return response()->json($service);
     }
 
     public function getService()
     {
-        return view('ser i dx.index');
+        $service = service::with(['operator'])->orderBy('service_id', 'DESC')->get();
+        return view('service.index');
     }
 
     /**
@@ -45,20 +47,20 @@ class serviceController extends Controller
      */
     public function store(Request $request)
     {
-        $operator = new operator;
-        $operator->name = $request->name;
-        $operator->contact_number = $request->contact_number;
-        $operator->age = $request->age;
-        $operator->address = $request->address;
+        $service = new service;
+        $service->service_type = $request->service_type;
+        $service->date_of_service = $request->date_of_service;
+        $service->price = $request->price;
+        $service->operator_id = $request->operator_id;
 
         $files = $request->file('uploads');
 
-        $operator->image_path = 'uploads/' . $files->getClientOriginalName();
-        $operator->save();
+        $service->image_path = 'uploads/' . $files->getClientOriginalName();
+        $service->save();
 
         Storage::put('uploads/' . $files->getClientOriginalName(), file_get_contents($files));
 
-        return response()->json(["success" => "Operator Created Successfully.", "operator" => $operator, "status" => 200]);
+        return response()->json(["success" => "Service Created Successfully.", "service" => $service, "status" => 200]);
     }
 
     /**
@@ -80,8 +82,8 @@ class serviceController extends Controller
      */
     public function edit($id)
     {
-        $operator = operator::find($id);
-        return response()->json($operator);
+        $service = service::find($id);
+        return response()->json($service);
     }
 
     /**
@@ -93,11 +95,11 @@ class serviceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $operator = operator::find($id);
-        $operator = $operator->update($request->all());
-        $operator = operator::find($id);
+        $service = service::find($id);
+        $service = $service->update($request->all());
+        $service = service::find($id);
 
-        return response()->json($operator);
+        return response()->json($service);
     }
 
     /**
@@ -108,13 +110,13 @@ class serviceController extends Controller
      */
     public function destroy($id)
     {
-        $operator = operator::findOrFail($id);
+        $service = service::findOrFail($id);
 
-        if (File::exists("storage/" . $operator->image_path)) {
-            File::delete("storage/" . $operator->image_path);
+        if (File::exists("storage/" . $service->image_path)) {
+            File::delete("storage/" . $service->image_path);
         }
 
-        $operator->delete();
+        $service->delete();
 
         $data = array('success' => 'deleted', 'code' => '200');
         return response()->json($data);
