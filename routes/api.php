@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CameraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,5 @@ use App\Http\Controllers\UserController;
 //     return $request->user();
 // });
 
+Route::apiResource('camera', CameraController::class);
 Route::apiResource('user', UserController::class);
