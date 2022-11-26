@@ -21,10 +21,10 @@ class UserController extends Controller
     {
         $request->validate([
             'email' => 'required|email',
-            'firstName' => 'required',
-            'lastName' => 'required',
-            'age' => 'required',
-            'password' => 'required'
+            'firstName' => 'required|alpha_dash',
+            'lastName' => 'required|alpha_dash',
+            'age' => 'required|numeric',
+            'password' => 'required|alpha_dash'
         ]);
 
         $data = new User([
